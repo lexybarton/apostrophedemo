@@ -1,0 +1,31 @@
+{% import '@apostrophecms/pager:macros.html' as pager with context %}
+{% import 'fragments.html' as fragments with context %}
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  <div class="article-title-wrapper">
+    <div class="inner">
+      {% set title = data.page.title %}
+      {% if data.piece %}
+        {% set title = data.piece.title %}
+      {% endif %}
+      <h1 class="page-title">{{ title }}</h1>
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+  <section class="article-index">
+    <header class="article-intro general-content">
+      {% area data.page, 'intro' %}
+    </header>
+    <div class="article-excerpts">
+      {% for article in data.pieces %}
+        {% render fragments.indexItem(article) %}
+      {% endfor %}
+    </div>
+    {{ pager.render({ page: data.currentPage, total: data.totalPages }, data.url) }}
+  </section>
+
+{% endblock %}

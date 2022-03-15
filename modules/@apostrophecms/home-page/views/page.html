@@ -1,0 +1,26 @@
+{#
+  This is an example home page template. It inherits and extends a layout template
+  that lives in the top-level views/ folder for convenience
+#}
+
+{% extends "layout.html" %}
+
+{# Home page is full width #}
+{% block pageTitle %}
+  <h1 class="meta home-title">{{ __t('homeTitle') }}</h1>
+{% endblock %}
+{% block subnav %}{% endblock %}
+
+{% block main %}
+  <div class="home">
+    <div class="content">
+      <div class="home-cta h2">
+        {% area data.page, 'cta' %}
+        {% area data.page, 'ctaLinks' %}
+      </div>
+      <div class="general-content">
+        {% area data.page, 'main' %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

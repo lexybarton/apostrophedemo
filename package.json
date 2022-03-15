@@ -1,0 +1,51 @@
+{
+  "name": "a3-demo",
+  "version": "1.0.0",
+  "description": "Apostrophe 3 Demo Site",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "dev": "APOS_DEV=1 nodemon --delay 1000ms -x \"nodemon app.js\"",
+    "staging-deploy": "echo \"ℹ️  Clearing module links and installed modules to deploy.\" && rm package-lock.json && rm -r node_modules && npm i && sc-deploy staging",
+    "analyze-bundle": "APOS_BUNDLE_ANALYZER=1 node app @apostrophecms/asset:build"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+    "@apostrophecms/seo": "github:apostrophecms/seo",
+    "apostrophe": "github:apostrophecms/apostrophe"
+  },
+  "author": "Apostrophe Technologies, Inc",
+  "license": "MIT",
+  "nodemonConfig": {
+    "verbose": true,
+    "watch": [
+      "./app.js",
+      "./modules/**/*",
+      "./lib/**/*.js",
+      "./views/**/*.html",
+      "./src/**/*",
+      "./node_modules/apostrophe/modules/@apostrophecms/**/*"
+    ],
+    "ignoreRoot": [
+      ".git"
+    ],
+    "ignore": [
+      "lib/modules/*/public/js/*.js",
+      "locales/*.json",
+      "public/uploads",
+      "public/apos-frontend",
+      "modules/asset/ui/public",
+      "data"
+    ],
+    "ext": "json, js, html, scss, vue"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-apostrophe": "^3.4.0",
+    "eslint-plugin-node": "^11.1.0",
+    "nodemon": "^2.0.12"
+  }
+}
